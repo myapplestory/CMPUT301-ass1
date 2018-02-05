@@ -51,7 +51,7 @@ public class activity_view extends AppCompatActivity {
         String namestring = "Name: " + getIntent().getStringExtra("name");
         nameInput.setText(namestring);
 
-        String amountstring = "Amount: " + getIntent().getStringExtra("amount");
+        String amountstring = "Amount: $" + getIntent().getStringExtra("amount");
         amountInput.setText(amountstring);
 
         String commentstring = "Comment: " + getIntent().getStringExtra("comment");
