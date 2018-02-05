@@ -50,11 +50,11 @@ import java.util.Objects;
 
 public class activity_edit extends AppCompatActivity {
     private static final String FILENAME = "scrub_list.sav";    // save file destination
-    Toolbar editToolbar;
-    EditText nameInput;             // initially declare some varable types
-    TextView datetextview;
-    EditText amountInput;
-    EditText commentInput;
+    private Toolbar editToolbar;
+    private EditText nameInput;             // initially declare some varable types
+    private TextView datetextview;
+    private EditText amountInput;
+    private EditText commentInput;
     private ArrayList<Subscription> sublist;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private Date currentdate;
@@ -77,7 +77,7 @@ public class activity_edit extends AppCompatActivity {
         sublist = new ArrayList<>();
 
         try {
-            set_textview();
+            setTextview();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -120,7 +120,7 @@ public class activity_edit extends AppCompatActivity {
         loadFromFile();
     }
 
-    public void set_textview()throws Exception {
+    private void setTextview()throws Exception {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.CANADA);
         String datestring = getIntent().getStringExtra("date");
         currentdate = dateFormat.parse(datestring);

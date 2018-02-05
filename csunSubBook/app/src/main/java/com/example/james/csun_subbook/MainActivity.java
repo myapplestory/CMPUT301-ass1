@@ -83,10 +83,10 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     // initialize variable and their types
-    Toolbar mainToolbar;
-    ListView oldSubList;
-    TextView amountview;
-    ArrayList<Subscription> sublist;
+    private Toolbar mainToolbar;
+    private ListView oldSubList;
+    private TextView amountview;
+    private ArrayList<Subscription> sublist;
 
     private ArrayAdapter<Subscription> adapter;
     private static final String FILENAME = "scrub_list.sav";        // save file destination
@@ -176,14 +176,13 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
-
                 adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, sublist);
                 oldSubList.setAdapter(adapter);
             }
         }
     }
 
-    public void updateAmount(){
+    private void updateAmount(){
         // puts the sum of the amount onto the textview
         Float totalamount = 0.0f;
         for (int i = 0; i < sublist.size(); i++) {

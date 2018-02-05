@@ -20,12 +20,11 @@ import java.util.Locale;
  */
 
 public class activity_view extends AppCompatActivity {
-    Toolbar addToolbar;
-    TextView nameInput;
-    TextView datetextview;
-    TextView amountInput;
-    TextView commentInput;
-
+    private Toolbar addToolbar;
+    private TextView nameInput;
+    private TextView datetextview;
+    private TextView amountInput;
+    private TextView commentInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +40,11 @@ public class activity_view extends AppCompatActivity {
         amountInput = findViewById(R.id.view_amounttext);
         commentInput = findViewById(R.id.view_commenttext);
 
-        set_textview();
+        setTextview();
     }
 
 
-    public void set_textview(){
+    private void setTextview(){
         // displays the data of the subscription into each of the textviews
         String datestring  = "Date: " + getIntent().getStringExtra("date");
         datetextview.setText(datestring);

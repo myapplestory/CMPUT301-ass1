@@ -50,12 +50,11 @@ import com.google.gson.reflect.TypeToken;
 
 public class activity_add extends AppCompatActivity {
     private static final String FILENAME = "scrub_list.sav";
-    Toolbar addToolbar;
-    EditText nameInput;
-    TextView datetextview;
-    EditText amountInput;
-    EditText commentInput;
-
+    private Toolbar addToolbar;
+    private EditText nameInput;
+    private TextView datetextview;
+    private EditText amountInput;
+    private EditText commentInput;
     private ArrayList<Subscription> sublist;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private Date currentdate;
