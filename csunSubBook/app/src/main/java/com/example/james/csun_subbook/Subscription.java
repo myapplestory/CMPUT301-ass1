@@ -35,13 +35,7 @@ public abstract class Subscription implements Subscribber {
         return name;
     }
 
-    public void setName(String name) throws NameTooLongException {
-        if (name.length() < 20){
-            this.name = name;
-        }
-        else{
-            throw new NameTooLongException();
-        }
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -58,13 +52,8 @@ public abstract class Subscription implements Subscribber {
         return amount;
     }
 
-    public void setAmount(Float amount) throws AmountNegativeException{
-        if (amount >= 0.0) {
-            this.amount = amount;
-        }
-        else {
-            throw new AmountNegativeException();
-        }
+    public void setAmount(Float amount){
+        this.amount = amount;
     }
 
     @Override
@@ -72,13 +61,7 @@ public abstract class Subscription implements Subscribber {
         return comment;
     }
 
-    public void setComment(String comment) throws CommentTooLongException{
-        if (comment.length() < 30){
-            this.comment = comment;
-        }
-        else{
-            throw new CommentTooLongException();
-        }
+    public void setComment(String comment){
         this.comment = comment;
     }
 

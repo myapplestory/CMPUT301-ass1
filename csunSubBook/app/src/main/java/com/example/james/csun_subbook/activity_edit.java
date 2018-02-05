@@ -5,7 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -36,6 +38,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
+import java.util.Objects;
 
 /**
  * Created by James on 2/4/2018.
@@ -43,9 +46,9 @@ import java.util.Locale;
  */
 
 public class activity_edit extends AppCompatActivity {
-    private static final String FILENAME = "scrub_list.sav";
+    private static final String FILENAME = "scrub_list.sav";    // save file destination
     Toolbar editToolbar;
-    EditText nameInput;
+    EditText nameInput;             // initially declare some varable types
     TextView datetextview;
     EditText amountInput;
     EditText commentInput;
@@ -67,7 +70,6 @@ public class activity_edit extends AppCompatActivity {
         commentInput = findViewById(R.id.edit_commenttext);
 
         sublist = new ArrayList<>();
-
 
         try {
             set_textview();
@@ -140,13 +142,34 @@ public class activity_edit extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.action_change) {
-            Toast.makeText(activity_edit.this, "Subscription changed", Toast.LENGTH_SHORT).show();
-
             String name = nameInput.getText().toString();
-            Float amount = Float.parseFloat(amountInput.getText().toString());
+            String amountstring = amountInput.getText().toString();
             String comment = commentInput.getText().toString();
+            Float amountfloat = 0.0f;
 
-            Subscription subscription = new Subscribe(name, currentdate, amount, comment);
+            if (Objects.equals(name, "") || Objects.equals(amountstring, "")){
+                Toast.makeText(activity_edit.this,
+                        "One or more of the required fields are not filled", Toast.LENGTH_SHORT).show();
+                return super.onOptionsItemSelected(item);
+            } else if (name.length() > 20){
+                Toast.makeText(activity_edit.this,
+                        "Name field longer than 20 characters", Toast.LENGTH_SHORT).show();
+                return super.onOptionsItemSelected(item);
+            } else if (comment.length() > 30){
+                Toast.makeText(activity_edit.this,
+                        "Comment field longer than 30 characters", Toast.LENGTH_SHORT).show();
+                return super.onOptionsItemSelected(item);
+            }
+            try {
+                amountfloat = Float.parseFloat(amountstring);
+            } catch (Exception exception){
+                Toast.makeText(activity_edit.this,
+                        "Incorrect value in amount field", Toast.LENGTH_SHORT).show();
+                return super.onOptionsItemSelected(item);
+            }
+
+
+            Subscription subscription = new Subscribe(name, currentdate, amountfloat, comment);
 
             Integer index = Integer.parseInt(getIntent().getStringExtra("position"));
             sublist.remove(sublist.get(index));
@@ -156,6 +179,7 @@ public class activity_edit extends AppCompatActivity {
 
             Intent intent = new Intent();
             setResult(RESULT_OK, intent);
+            Toast.makeText(activity_edit.this, "Subscription changed", Toast.LENGTH_SHORT).show();
             finish();
         }
 

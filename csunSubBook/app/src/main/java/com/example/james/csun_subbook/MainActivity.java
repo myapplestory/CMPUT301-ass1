@@ -34,6 +34,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 
+/**
+*
+*
+*
+* 
+ */
+
+
+
 public class MainActivity extends AppCompatActivity {
     Toolbar mainToolbar;
     ListView oldSubList;
@@ -87,7 +96,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_view:
                 Intent intentview = new Intent(this, activity_view.class);
                 intentview.putExtra("name", sublist.get(info.position).getName());
-                intentview.putExtra("amount", sublist.get(info.position).getAmount().toString());
+                intentview.putExtra("amount", String.format(Locale.CANADA,"%.2f",
+                        sublist.get(info.position).getAmount()));
                 intentview.putExtra("comment", sublist.get(info.position).getComment());
 
                 intentview.putExtra("date", dateFormat.format(sublist.get(info.position).getDate()));
@@ -97,10 +107,10 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_edit:
                 Intent intentedit = new Intent(this, activity_edit.class);
                 intentedit.putExtra("name", sublist.get(info.position).getName());
-                intentedit.putExtra("amount", sublist.get(info.position).getAmount().toString());
+                intentedit.putExtra("amount", String.format(Locale.CANADA, "%.2f",
+                        sublist.get(info.position).getAmount()));
                 intentedit.putExtra("comment", sublist.get(info.position).getComment());
                 intentedit.putExtra("position", String.format("%s", info.position));
-
                 intentedit.putExtra("date", dateFormat.format(sublist.get(info.position).getDate()));
 
                 startActivityForResult(intentedit, 1);

@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -33,6 +35,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
+import java.util.Objects;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -120,19 +123,39 @@ public class activity_add extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == R.id.action_add) {
-            Toast.makeText(activity_add.this, "Subscription added", Toast.LENGTH_SHORT).show();
-
             String name = nameInput.getText().toString();
-            Float amount = Float.parseFloat(amountInput.getText().toString());
+            String amountstring = amountInput.getText().toString();
             String comment = commentInput.getText().toString();
+            Float amountfloat = 0.0f;
 
+            if (Objects.equals(name, "") || Objects.equals(amountstring, "")){
+                Toast.makeText(activity_add.this,
+                        "One or more of the required fields are not filled", Toast.LENGTH_SHORT).show();
+                return super.onOptionsItemSelected(item);
+            } else if (name.length() > 20){
+                Toast.makeText(activity_add.this,
+                        "Name field longer than 20 characters", Toast.LENGTH_SHORT).show();
+                return super.onOptionsItemSelected(item);
+            } else if (comment.length() > 30){
+                Toast.makeText(activity_add.this,
+                        "Comment field longer than 30 characters", Toast.LENGTH_SHORT).show();
+                return super.onOptionsItemSelected(item);
+            }
+            try {
+                amountfloat = Float.parseFloat(amountstring);
+            } catch (Exception exception){
+                Toast.makeText(activity_add.this,
+                        "Incorrect value in amount field", Toast.LENGTH_SHORT).show();
+                return super.onOptionsItemSelected(item);
+            }
 
-            Subscription subscription = new Subscribe(name, currentdate, amount, comment);
+            Subscription subscription = new Subscribe(name, currentdate, amountfloat, comment);
             sublist.add(subscription);
             saveInFile();
 
             Intent intent = new Intent();
             setResult(RESULT_OK, intent);
+            Toast.makeText(activity_add.this, "Subscription added", Toast.LENGTH_SHORT).show();
             finish();
         }
 

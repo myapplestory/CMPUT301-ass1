@@ -34,7 +34,7 @@
         android:fontFamily="casual"
         android:gravity="center"
         android:hint="@string/enter_amount"
-        android:inputType="textPersonName"
+        android:inputType="numberDecimal"
         android:textColor="@android:color/holo_purple"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
