@@ -7,7 +7,11 @@ import java.util.Locale;
 
 
 /**
- * Created by James on 2/3/2018.
+ * created on Feb 2 2018
+ * @author James Sun
+ *
+ * this class is contains data about a subscription and returns the details of a subscription
+ * as well as the toString function which returns a string that contains the data to be presented
  *
  */
 
@@ -24,13 +28,7 @@ public abstract class Subscription implements Subscribber {
         this.comment = comment;
     }
 
-    Subscription(String name, Date date, Float amount){
-        this.name = name;
-        this.date = date;
-        this.amount = amount;
-        this.comment = "";
-    }
-
+    // setters and getters, nothing special
     public String getName() {
         return name;
     }

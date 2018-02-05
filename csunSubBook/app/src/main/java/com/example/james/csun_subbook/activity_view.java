@@ -12,7 +12,10 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * Created by James on 2/4/2018.
+ * created on Feb 2 2018
+ * @author James Sun
+ *
+ * this class is in charge of the interface that displays the data of a subscription
  *
  */
 
@@ -23,14 +26,13 @@ public class activity_view extends AppCompatActivity {
     TextView amountInput;
     TextView commentInput;
 
-    private Date currentdate;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view);
 
+        // initialize toolbar
         addToolbar = findViewById(R.id.view_toolbar);
         setSupportActionBar(addToolbar);
 
@@ -44,7 +46,7 @@ public class activity_view extends AppCompatActivity {
 
 
     public void set_textview(){
-
+        // displays the data of the subscription into each of the textviews
         String datestring  = "Date: " + getIntent().getStringExtra("date");
         datetextview.setText(datestring);
 

@@ -41,7 +41,10 @@ import java.util.Locale;
 import java.util.Objects;
 
 /**
- * Created by James on 2/4/2018.
+ * created on Feb 2 2018
+ * @author James Sun
+ *
+ * this class is in charge of the interface where the user can edit the data of a existing subscription
  *
  */
 
@@ -61,9 +64,11 @@ public class activity_edit extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit);
 
+        // initialize toolbar
         editToolbar = findViewById(R.id.edit_toolbar);
         setSupportActionBar(editToolbar);
 
+        // set each textview and edittext on the layout to each name
         nameInput = findViewById(R.id.edit_nametext);
         datetextview = findViewById(R.id.edit_datetext);
         amountInput = findViewById(R.id.edit_amounttext);
@@ -77,6 +82,8 @@ public class activity_edit extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        // the following two functions are in charge of the calendar fragment
+        // where the user can select a date for a subscription
         datetextview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -147,6 +154,9 @@ public class activity_edit extends AppCompatActivity {
             String comment = commentInput.getText().toString();
             Float amountfloat = 0.0f;
 
+            // checks if textviews contains data following the requirements
+            // if so, add subscription details to a new Subscription and add to sublist and savefile
+            // and go back to MainActivity
             if (Objects.equals(name, "") || Objects.equals(amountstring, "")){
                 Toast.makeText(activity_edit.this,
                         "One or more of the required fields are not filled", Toast.LENGTH_SHORT).show();
@@ -168,7 +178,6 @@ public class activity_edit extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
             }
 
-
             Subscription subscription = new Subscribe(name, currentdate, amountfloat, comment);
 
             Integer index = Integer.parseInt(getIntent().getStringExtra("position"));
@@ -182,10 +191,10 @@ public class activity_edit extends AppCompatActivity {
             Toast.makeText(activity_edit.this, "Subscription changed", Toast.LENGTH_SHORT).show();
             finish();
         }
-
         return super.onOptionsItemSelected(item);
     }
 
+    // load/savefromfile gotten from lonely twitter
     private void loadFromFile() {
         try {
             FileInputStream fis = openFileInput(FILENAME);

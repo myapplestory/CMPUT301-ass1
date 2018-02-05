@@ -3,7 +3,10 @@ package com.example.james.csun_subbook;
 import java.util.Date;
 
 /**
- * Created by James on 2/3/2018.
+ * created on Feb 2 2018
+ * @author James Sun
+ *
+ *
  *
  */
 

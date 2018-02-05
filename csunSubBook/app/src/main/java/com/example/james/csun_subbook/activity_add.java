@@ -40,6 +40,13 @@ import java.util.Objects;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * created on Feb 2 2018
+ *
+ * @author James Sun
+ *         <p>
+ *         this class is in charge of the interface where the user can add a new subscription
+ */
 
 public class activity_add extends AppCompatActivity {
     private static final String FILENAME = "scrub_list.sav";
@@ -59,9 +66,11 @@ public class activity_add extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
+        // initialize toolbar
         addToolbar = findViewById(R.id.add_toolbar);
         setSupportActionBar(addToolbar);
 
+        // set each textview and edittext on the layout to each name
         nameInput = findViewById(R.id.add_nametext);
         datetextview = findViewById(R.id.add_datetext);
         amountInput = findViewById(R.id.add_amounttext);
@@ -73,7 +82,8 @@ public class activity_add extends AppCompatActivity {
         currentdate = new Date();
         datetextview.setText(dateFormat.format(currentdate));
 
-
+        // the following two functions are in charge of the calendar fragment
+        // where the user can select a date for a subscription
         datetextview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,7 +105,7 @@ public class activity_add extends AppCompatActivity {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 Calendar result = new GregorianCalendar();
-                result.set(year,month,day,0,0,0);
+                result.set(year, month, day, 0, 0, 0);
                 DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.CANADA);
                 currentdate = result.getTime();
                 datetextview.setText(dateFormat.format(currentdate));
@@ -104,46 +114,49 @@ public class activity_add extends AppCompatActivity {
     }
 
 
-
     @Override
     protected void onStart() {
+        // load old data into sublist on start
         super.onStart();
         loadFromFile();
     }
 
-    // function that displays the add option on the toolbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // function that displays the add option on the toolbar
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.options_menu, menu);
         return true;
     }
 
-    // function that does stuff when add is clicked
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.action_add) {
+        // when the add button on the toolbar is clicked
+        if (item.getItemId() == R.id.action_add) {
             String name = nameInput.getText().toString();
             String amountstring = amountInput.getText().toString();
             String comment = commentInput.getText().toString();
             Float amountfloat = 0.0f;
 
-            if (Objects.equals(name, "") || Objects.equals(amountstring, "")){
+            // checks if textviews contains data following the requirements
+            // if so, add subscription details to a new Subscription and add to sublist and savefile
+            // and go back to MainActivity
+            if (Objects.equals(name, "") || Objects.equals(amountstring, "")) {
                 Toast.makeText(activity_add.this,
                         "One or more of the required fields are not filled", Toast.LENGTH_SHORT).show();
                 return super.onOptionsItemSelected(item);
-            } else if (name.length() > 20){
+            } else if (name.length() > 20) {
                 Toast.makeText(activity_add.this,
                         "Name field longer than 20 characters", Toast.LENGTH_SHORT).show();
                 return super.onOptionsItemSelected(item);
-            } else if (comment.length() > 30){
+            } else if (comment.length() > 30) {
                 Toast.makeText(activity_add.this,
                         "Comment field longer than 30 characters", Toast.LENGTH_SHORT).show();
                 return super.onOptionsItemSelected(item);
             }
             try {
                 amountfloat = Float.parseFloat(amountstring);
-            } catch (Exception exception){
+            } catch (Exception exception) {
                 Toast.makeText(activity_add.this,
                         "Incorrect value in amount field", Toast.LENGTH_SHORT).show();
                 return super.onOptionsItemSelected(item);
@@ -158,10 +171,10 @@ public class activity_add extends AppCompatActivity {
             Toast.makeText(activity_add.this, "Subscription added", Toast.LENGTH_SHORT).show();
             finish();
         }
-
         return super.onOptionsItemSelected(item);
     }
 
+    // load/savefromfile gotten from lonely twitter
     private void loadFromFile() {
         try {
             FileInputStream fis = openFileInput(FILENAME);
@@ -169,7 +182,8 @@ public class activity_add extends AppCompatActivity {
 
             Gson gson = new Gson();
 
-            Type listType = new TypeToken<ArrayList<Subscribe>>(){}.getType();
+            Type listType = new TypeToken<ArrayList<Subscribe>>() {
+            }.getType();
             sublist = gson.fromJson(in, listType);
 
         } catch (FileNotFoundException e) {

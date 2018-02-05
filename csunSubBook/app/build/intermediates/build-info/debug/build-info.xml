@@ -5,34 +5,36 @@
     build-mode="COLD"
     density="xxhdpi"
     format="10"
+    ir-eligibility="METHOD_DELETED"
     plugin-version="3.0.1"
-    timestamp="1517848905097"
+    timestamp="1517861083572"
     token="1046278637952464343"
     verifier="COLD_SWAP_REQUESTED" >
 
     <task
         name="javac"
-        duration="0" />
+        duration="832" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="0" />
+        duration="363" />
     <task
         name="verifier"
-        duration="0" />
+        duration="42" />
+
+    <artifact
+        location="C:\Users\James\Desktop\school\cmput301\csunSubBook\app\build\intermediates\split-apk\debug\slices\slice_4.apk"
+        type="SPLIT" />
 
     <build
         build-mode="FULL"
-        timestamp="1517848858238"
+        timestamp="1517857285694"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
             location="C:\Users\James\Desktop\school\cmput301\csunSubBook\app\build\intermediates\split-apk\debug\slices\slice_4.apk"
             type="SPLIT" />
-        <artifact
-            location="C:\Users\James\Desktop\school\cmput301\csunSubBook\app\build\outputs\apk\debug\app-debug.apk"
-            type="SPLIT_MAIN" />
         <artifact
             location="C:\Users\James\Desktop\school\cmput301\csunSubBook\app\build\intermediates\split-apk\debug\slices\slice_9.apk"
             type="SPLIT" />
@@ -63,10 +65,18 @@
         <artifact
             location="C:\Users\James\Desktop\school\cmput301\csunSubBook\app\build\intermediates\split-apk\debug\slices\slice_8.apk"
             type="SPLIT" />
+        <artifact
+            location="C:\Users\James\Desktop\school\cmput301\csunSubBook\app\build\outputs\apk\debug\app-debug.apk"
+            type="SPLIT_MAIN" />
     </build>
     <build
         build-mode="COLD"
-        timestamp="1517848905097"
-        verifier="COLD_SWAP_REQUESTED" />
+        ir-eligibility="METHOD_DELETED"
+        timestamp="1517861083572"
+        verifier="COLD_SWAP_REQUESTED" >
+        <artifact
+            location="C:\Users\James\Desktop\school\cmput301\csunSubBook\app\build\intermediates\split-apk\debug\slices\slice_4.apk"
+            type="SPLIT" />
+    </build>
 
 </instant-run>

@@ -3,16 +3,17 @@ package com.example.james.csun_subbook;
 import java.util.Date;
 
 /**
- * Created by James on 2/3/2018.
+ * created on Feb 2 2018
+ * @author James Sun
+ *
+ * this class is in charge of creating a new subscription object
+ * as well as returning data about a subciption
  *
  */
 
 public class Subscribe extends Subscription{
     Subscribe(String name, Date date, Float amount, String comment){
         super(name, date, amount, comment);
-    }
-    Subscribe(String name, Date date, Float amount) {
-        super(name, date, amount);
     }
 
     @Override
